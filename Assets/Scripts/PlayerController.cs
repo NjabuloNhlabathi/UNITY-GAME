@@ -3,10 +3,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public float thrustForce = 1f;
+    Rigidbody2D rb;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -14,11 +19,23 @@ public class PlayerController : MonoBehaviour
     {
         if (Mouse.current.leftButton.isPressed)
         {
+
+            //Caculate mouse direction
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
             Debug.Log("Mouse Position: " + mousePos);
+            Vector2 direction = (mousePos - transform.position).normalized;
 
-            Vector2 direction = mousePos - transform.position;
+
+            //MOVE PLAYER IN DIRECTION
             transform.up = direction;
+            rb.AddForce(direction * thrustForce);
         }
+
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
+
 }
