@@ -18,7 +18,9 @@ public class Obstacle : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         float randomSpeed = Random.Range(minSpeed, maxSpeed);
-        rb.AddForce(Vector2.right * randomSpeed);
+
+        Vector2 randomDirection = Random.insideUnitCircle;
+        rb.AddForce(randomDirection * randomSpeed);
     }
 
     // Update is called once per frame
