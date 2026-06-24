@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
-        score = elapsedTime * ScoreMultiplier;
+        score = Mathf.FloorToInt(elapsedTime * ScoreMultiplier);
 
         Debug.Log("Score: " + score);
 
